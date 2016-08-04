@@ -1,0 +1,29 @@
+_repo: On-the-Prospects-of-Christianity--13-Bernard-Shaw-s-Preface-to-Androcles-and-the-Lion_4004
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Shaw, Bernard
+    alias: Shaw, George Bernard
+    birthdate: 1856
+    deathdate: 1950
+    gutenberg_agent_id: '467'
+    url: http://www.gutenberg.org/2009/agents/467
+    wikipedia: http://en.wikipedia.org/wiki/George_Bernard_Shaw
+description: ''
+gutenberg_issued: '2003-05-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '4004'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Essays'
+- !lcc 'PR'
+- !lcsh 'Prefaces'
+- !lcsh 'Christianity'
+- GITenberg
+title: "On the Prospects of Christianity\r\nBernard Shaw's Preface to Androcles and\
+  \ the Lion"
+url: http://www.gutenberg.org/ebooks/4004
