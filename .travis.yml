@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: gSlkDKQcS5Uo9v7+HlwTx6pemuKselXQ/JaC6s3SaLglikDvYcpSOMTl/LtU9UQRNYxdPAyFEZHDyMmuW62rNhluO4kfx+Z0fs1VSkB4Xtw7Gmx8FgOwAfzAyIOU7iwTcAsCsDQxGIhLhdTnbX76guk6fhVcZ2f60hjV9g8wtUJiVRq1gVa/K++c4ZVgGut68yX/YEiAENs5EQ02OGxkLyGA/7bw5ND4i6JToX2iwtiP+UV3s1K92dV9gvtgHop4JZpbK72yqkDPZ0qWhSXIRuSqldtmXku31rsfDzhsAUfBwSxVnp/EJdkdJ+OFxl/VlC22YQRst3z1sO7fySIS1NpWTTM1POlxZjeAo/wi26GGMgTcjjkqrMQWc49l5CEIXBQEPk0CtO1l2bmH2sFaatZqySi7y8VcAQkeFzIjih1nPCqw8LBctV2YsWersgDrKdx9/ZM5wRsBDmEg6LDPBtBcRryODfrCa6quOtAJ0qgf7w9J2zfczvBG4e7lQoJ4PJttJs+E2p2L7vS57g7Q5P0cfqnvrPSaXx8jftUlxH0c6kHl1B3VJP9h269+MrFnXbFQ33nmimHRk12OdKZ3YTF8otDU+Lt0a2OIYI5gp5+kdcQ2sqzd2z7KedMORQZ0h/ECyHcFKgGLX4SNgudZVjjKuZJfkvZ/CBUrjNPTtNM=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/On-the-Prospects-of-Christianity--13-Bernard-Shaw-s-Preface-to-Androcles-and-the-Lion_4004
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
